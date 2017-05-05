@@ -41,8 +41,12 @@ router.get("/:id", loggedInOnly, (req, res) => {
   let recipeId = req.params.id;
   Recipe.findById(recipeId)
     .then(recipe => {
-      recipe.ingredients = recipe.ingredients.join("; ");
-      res.render("editRecipe", { recipe });
+      if (req.user._id.toString() !== recipe.owner.toString()) {
+        res.redirect("/");
+      } else {
+        recipe.ingredients = recipe.ingredients.join("; ");
+        res.render("editRecipe", { recipe });
+      }
     })
     .catch(e => res.status(500).send(e.stack));
 });
