@@ -37,12 +37,38 @@ router.post("/add", loggedInOnly, (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 
-router.get("/edit/:id", loggedInOnly, (req, res) => {
+router.get("/:id", loggedInOnly, (req, res) => {
   let recipeId = req.params.id;
   Recipe.findById(recipeId)
     .then(recipe => {
       recipe.ingredients = recipe.ingredients.join("; ");
       res.render("editRecipe", { recipe });
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+router.put("/:id", (req, res) => {
+  var { name, ingredients, recipeYield, instructions, image, url } = req.body;
+  ingredients = ingredients.split("; ");
+  Recipe.findByIdAndUpdate(req.params.id, {
+    name,
+    ingredients,
+    recipeYield,
+    image,
+    url
+  })
+    .then(() => {
+      req.method = "GET";
+      res.redirect("/");
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+router.delete("/:id", (req, res) => {
+  Recipe.findByIdAndRemove(req.params.id)
+    .then(() => {
+      req.method = "GET";
+      res.redirect("/");
     })
     .catch(e => res.status(500).send(e.stack));
 });
