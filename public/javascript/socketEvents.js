@@ -11,8 +11,7 @@ $(document).ready(function() {
       instructions,
       url,
       username,
-      createdAt,
-      recipeId
+      date
     } = recipe;
     $("#here").prepend(
       `<div class="content_box">
@@ -22,7 +21,8 @@ $(document).ready(function() {
         <p>${ingredients}</p>  
 
         <p>${instructions} <a href="${url}">${url}</a></p>
-        <cite>Just Submitted by ${username}</cite>
+        <cite>${username} on ${date}</cite>
+
       </div>`
     );
   });

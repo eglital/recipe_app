@@ -130,6 +130,10 @@ app.use((req, res, next) => {
   next();
 });
 
+const formatDate = require("./helpers/utilsHelpers").formatDate;
+
+const models = require("./models");
+const Recipe = mongoose.model("Recipe");
 // WEBSOCKETS
 
 app.use(
@@ -139,6 +143,7 @@ app.use(
 
 io.on("connection", client => {
   client.on("add recipe", recipe => {
+    recipe.date = formatDate(new Date());
     io.emit("new recipe", recipe);
   });
 });

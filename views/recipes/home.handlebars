@@ -1,3 +1,4 @@
+
 <div class="templatemo_main">
   {{#if currentUser.my}}
   <h1 class="text-center">My Recipes</h1>
@@ -11,6 +12,7 @@
       <div class="content_box">
         <h2>{{recipe.name}}</h2>
         <div class="image_wrapper image_fr"><span></span><img src="{{recipe.image}}" style="width: 217px; height: 104px;" alt="image of recipe" /></div>
+        <p style="color:blue"><strong>Likes: {{recipe.likedBy.length}}</span></strong></p>
         <p><strong>Servings: {{recipe.recipeYield}}</strong></p>
         <p><ul>
 
@@ -25,10 +27,17 @@
           <a href="/recipes/edit/{{recipe._id}}" class="btn btn-default" style="color: blue">Edit</a>
           <a href="/recipes/{{ recipe._id }}?_method=delete" class="btn btn-default" style="color: red">Delete</a>
           {{else}}
-            {{#if (isIn ../currentUser._id recipe.reportedBy)}}
-            <a href="#" class="btn btn-default" disabled style="color: red">Reported</a>
+
+          {{#if (isIn ../currentUser._id recipe.likedBy)}}
+          <button class="btn btn-default" disabled style="color: blue">Liked</button>
             {{else}}
-          <a href="/recipes/report/{{recipe._id}}" class="btn btn-default" style="color: red">Report</a>
+           
+          <a href="/recipes/like/{{recipe._id}}" class="btn btn-default" style="color: blue">Like</a>
+          {{/if}}
+            {{#if (isIn ../currentUser._id recipe.reportedBy)}}
+            <button class="btn btn-default" disabled style="color: red">Reported</button>
+            {{else}}
+          <a href="/recipes/like/{{recipe._id}}" class="btn btn-default" style="color: red">Report</a>
           {{/if}}
         {{/if}}
         </div>

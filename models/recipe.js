@@ -10,7 +10,8 @@ const RecipeSchema = new Schema(
     instructions: String,
     image: String,
     url: String,
-    reportedBy: [{ type: Schema.Types.ObjectId, ref: "User" }]
+    reportedBy: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }]
   },
   {
     timestamps: true

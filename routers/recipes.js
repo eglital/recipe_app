@@ -105,4 +105,14 @@ router.get("/report/:id", loggedInOnly, notAdminOnly, (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 
+router.get("/like/:id", loggedInOnly, notAdminOnly, (req, res) => {
+  Recipe.findByIdAndUpdate(req.params.id, {
+    $push: { likedBy: req.user._id }
+  })
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
 module.exports = router;
