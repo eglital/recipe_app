@@ -1,0 +1,34 @@
+{
+  "name": "mar-hackaton-fantastic-octo-lamp",
+  "version": "1.0.0",
+  "description": "Hackaton End of Week 6. GET CRAZY CODING!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seeds": "node seeds",
+    "c": "node repl.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eglital/mar-hackaton-fantastic-octo-lamp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eglital/mar-hackaton-fantastic-octo-lamp/issues"
+  },
+  "homepage": "https://github.com/eglital/mar-hackaton-fantastic-octo-lamp#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.2",
+    "mongoose": "^4.9.7",
+    "mongoose-unique-validator": "^1.0.5",
+    "morgan": "^1.8.1"
+  }
+}
