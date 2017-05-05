@@ -13,10 +13,12 @@ $(document).ready(function() {
       username,
       date
     } = recipe;
-    $("#here").prepend(
-      `<div class="content_box">
+    if ($("input[name='ifSearch'").val() !== "search") {
+      $("#here").prepend(
+        `<div class="content_box">
         <h2>${name}</h2>
         <div class="image_wrapper image_fr"><span></span><img src="${image}" style="width: 217px; height: 104px;" alt="image of recipe" /></div>
+         <p style="color:blue" class="likesList"><strong>Likes: 0</strong></p>
         <p><strong>Servings: ${recipeYield}</strong></p>
         <p>${ingredients}</p>  
 
@@ -24,7 +26,8 @@ $(document).ready(function() {
         <cite>${username} on ${date}</cite>
 
       </div>`
-    );
+      );
+    }
   });
 
   //Event Handlers

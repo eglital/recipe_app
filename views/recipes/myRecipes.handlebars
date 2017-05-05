@@ -1,8 +1,6 @@
 
 <div class="templatemo_main">
-
-
- <form role="form" action="/recipes/search" method="GET">  
+ <form role="form" action="/recipes/my/search" method="GET">  
     <div class="row">
       <div class="col-xs-12">
         <div class="input-group input-group-lg">
@@ -15,12 +13,12 @@
     </div><!-- /.row -->
 </form>
   <br>
-  <div class="templatemo_content" id="here">
-
+  <h1 class="text-center">My Recipes</h1>
+  <div class="templatemo_content">
   {{#if search}}
-  <h4>Your search results </h4>
-  <input type="hidden" name="ifSearch" value="search">
+  <h4>Your search results:</h4>
   {{/if}}
+  <br>
     {{#each recipes as |recipe|}}
       <div class="content_box">
         <h2>{{recipe.name}}</h2>

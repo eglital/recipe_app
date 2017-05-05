@@ -7,7 +7,7 @@ const { loggedInOnly, adminOnly } = require("../helpers/sessions");
 
 router.get("/", loggedInOnly, adminOnly, (req, res) => {
   Recipe.find()
-    .populate("owner")
+    .populate("owner likedBy")
     .sort({ createdAt: "desc" })
     .then(recipes => {
       res.render("admin/admin", { recipes });
@@ -17,7 +17,7 @@ router.get("/", loggedInOnly, adminOnly, (req, res) => {
 
 router.get("/reported", loggedInOnly, adminOnly, (req, res) => {
   Recipe.find({ reportedBy: { $gt: [] } })
-    .populate("reportedBy owner")
+    .populate("reportedBy owner likedBy")
     .then(recipes => {
       res.render("admin/reported", { recipes });
     })

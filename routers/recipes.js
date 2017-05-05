@@ -85,12 +85,11 @@ router.delete("/:id", (req, res) => {
 });
 
 router.get("/my", loggedInOnly, notAdminOnly, (req, res) => {
-  res.locals.currentUser.my = true;
   Recipe.find({ owner: req.user._id })
     .populate("owner likedBy")
     .sort({ createdAt: "desc" })
     .then(recipes => {
-      res.render("recipes/home", { recipes });
+      res.render("recipes/myRecipes", { recipes });
     })
     .catch(e => res.status(500).send(e.stack));
 });
@@ -115,4 +114,41 @@ router.get("/like/:id", loggedInOnly, notAdminOnly, (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 
+router.get("/search", loggedInOnly, (req, res) => {
+  let search = req.query.search;
+  let regex = new RegExp(search, "i");
+  Recipe.find({
+    $or: [
+      { name: { $regex: regex } },
+      { instructions: { $regex: regex } },
+      { ingredients: { $regex: regex } }
+    ]
+  })
+    .populate("owner likedBy")
+    .then(recipes => {
+      res.locals.search = true;
+      res.render("recipes/home", { recipes });
+    });
+});
+router.get("/my/search", loggedInOnly, notAdminOnly, (req, res) => {
+  let search = req.query.search;
+  let regex = new RegExp(search, "i");
+  Recipe.find({
+    $and: [
+      { owner: req.user._id },
+      {
+        $or: [
+          { name: { $regex: regex } },
+          { instructions: { $regex: regex } },
+          { ingredients: { $regex: regex } }
+        ]
+      }
+    ]
+  })
+    .populate("owner likedBy")
+    .then(recipes => {
+      res.locals.search = true;
+      res.render("recipes/myRecipes", { recipes });
+    });
+});
 module.exports = router;
