@@ -92,8 +92,8 @@ em { color: #e55822; }
 
 #site_title {
   float: left;
-  width: 350px;
-  margin: 35px 0 0 0;
+  width: 300px;
+  margin: 35px 10px 0;
   text-align: center;
 }
 
@@ -118,7 +118,7 @@ em { color: #e55822; }
 
 #templatemo_menu {
   float: right;
-  width: 450px;
+  width: 470px;
   height: 90px;
   padding: 12px 20px;
   background: url(../images/templatemo_menu.jpg) no-repeat;
@@ -135,9 +135,9 @@ em { color: #e55822; }
 #templatemo_menu ul li {
   float: left;
   height: 82px;
-  padding: 0 10px;
+/*  padding: 0 10px;
   margin: 0;
-  display: inline-block;
+  display: inline-block;*/
   background: url(../images/templatemo_menu_divider.png) no-repeat bottom right;
 }
 
@@ -148,7 +148,7 @@ em { color: #e55822; }
   display: block;
   height: 42px;
   font-size: 14px;
-  padding: 40px 10px 0;
+  padding: 20px 0 0;
   color: #fff;  
   text-decoration: none;
   font-weight: normal;
@@ -157,9 +157,9 @@ em { color: #e55822; }
   
 }
 
-#templatemo_menu ul li a:hover, #templatemo_menu ul .current {
+/*#templatemo_menu ul li a:hover, #templatemo_menu ul .current {
   background: url(../images/templatemo_menu_hover.png) no-repeat center bottom;
-}
+}*/
 
 /* end of menu */
 
@@ -169,7 +169,8 @@ em { color: #e55822; }
   clear: both;
   width: 860px;
   padding: 40px 30px;
-  background: #fff url(../images/templatemo_main.png) no-repeat top;
+  background-color: white;
+  /*background: #fff url(../images/templatemo_main.png) no-repeat top;*/
 }
 
 .templatemo_content {

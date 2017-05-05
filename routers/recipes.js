@@ -4,10 +4,14 @@ const mongoose = require("mongoose");
 const models = require("./../models");
 const User = mongoose.model("User");
 const Recipe = mongoose.model("Recipe");
-const { loggedInOnly, loggedOutOnly } = require("../helpers/sessions");
+const {
+  loggedInOnly,
+  loggedOutOnly,
+  notAdminOnly
+} = require("../helpers/sessions");
 
-router.get("/add", loggedInOnly, (req, res) => {
-  res.render("addRecipe");
+router.get("/add", loggedInOnly, notAdminOnly, (req, res) => {
+  res.render("recipes/addRecipe");
 });
 
 router.post("/add", loggedInOnly, (req, res) => {
@@ -41,11 +45,14 @@ router.get("/edit/:id", loggedInOnly, (req, res) => {
   let recipeId = req.params.id;
   Recipe.findById(recipeId)
     .then(recipe => {
-      if (req.user._id.toString() !== recipe.owner.toString()) {
+      if (
+        req.user._id.toString() !== recipe.owner.toString() &&
+        req.user.username !== "admin"
+      ) {
         res.redirect("/");
       } else {
         recipe.ingredients = recipe.ingredients.join("; ");
-        res.render("editRecipe", { recipe });
+        res.render("recipes/editRecipe", { recipe });
       }
     })
     .catch(e => res.status(500).send(e.stack));
@@ -63,7 +70,7 @@ router.put("/edit/:id", (req, res) => {
   })
     .then(() => {
       req.method = "GET";
-      res.redirect("back");
+      res.redirect("/");
     })
     .catch(e => res.status(500).send(e.stack));
 });
@@ -77,18 +84,18 @@ router.delete("/:id", (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 
-router.get("/my", loggedInOnly, (req, res) => {
+router.get("/my", loggedInOnly, notAdminOnly, (req, res) => {
   res.locals.currentUser.my = true;
   Recipe.find({ owner: req.user._id })
     .populate("owner")
     .sort({ createdAt: "desc" })
     .then(recipes => {
-      res.render("home", { recipes });
+      res.render("recipes/home", { recipes });
     })
     .catch(e => res.status(500).send(e.stack));
 });
 
-router.get("/report/:id", loggedInOnly, (req, res) => {
+router.get("/report/:id", loggedInOnly, notAdminOnly, (req, res) => {
   Recipe.findByIdAndUpdate(req.params.id, {
     $push: { reportedBy: req.user._id }
   })

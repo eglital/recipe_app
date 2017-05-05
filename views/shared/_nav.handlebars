@@ -1,18 +1,22 @@
 <div id="templatemo_header">
     
-        <div id="site_title">
-            <a href="/"><img src="/images/food.png" style="width: 50px" alt="logo" /><span>Stir things up</span></a>
-        </div> <!-- end of site_title -->
-        
-        <div id="templatemo_menu">
-            {{#if currentUser}}
-            <ul>
-                <li><a href="#">Hello, {{currentUser.username}}</a></li>
-                <li><a href="/recipes/add">Add recipe</a></li>
-              <li><a href="/recipes/my">My recipes</a></li>
-                <li class="last"><a href="/logout">Logout</a></li>
-            </ul> 
-            {{/if}}      
-        </div> <!-- end of templatemo_menu -->
+    <div id="site_title">
+        <a href="/"><img src="/images/food.png" style="width: 50px" alt="logo" /><span>Stir things up</span></a>
+    </div> <!-- end of site_title -->
     
-    </div> <!-- end of header -->
+    <div id="templatemo_menu">
+        {{#if currentUser}}
+        <ul class="row">
+            <li class="col-xs-4"><a href="#">Hello, {{currentUser.username}}</a></li>
+            {{#if (isAdmin currentUser.username)}}
+            <li class="col-xs-6"><a href="/admin/reported">Reported Recipes</a></li>
+            {{else}}
+            <li class="col-xs-3"><a href="/recipes/add">Add recipe</a></li>
+          <li class="col-xs-3"><a href="/recipes/my">My recipes</a></li>
+          {{/if}}
+            <li class="last col-xs-1"><a href="/logout">Logout</a></li>
+        </ul> 
+        {{/if}}      
+    </div> <!-- end of templatemo_menu -->
+
+</div> <!-- end of header -->

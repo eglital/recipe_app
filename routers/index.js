@@ -8,20 +8,24 @@ const { loggedInOnly, loggedOutOnly } = require("../helpers/sessions");
 const passport = require("passport");
 
 router.get("/", loggedInOnly, (req, res) => {
-  Recipe.find({})
-    .populate("owner")
-    .sort({ createdAt: "desc" })
-    .then(recipes => {
-      res.render("home", { recipes });
-    });
+  if (req.user.username === "admin") {
+    res.redirect("/admin");
+  } else {
+    Recipe.find({})
+      .populate("owner")
+      .sort({ createdAt: "desc" })
+      .then(recipes => {
+        res.render("recipes/home", { recipes });
+      });
+  }
 });
 
 router.get("/login", loggedOutOnly, (req, res) => {
-  res.render("login");
+  res.render("sessions/login");
 });
 
 router.get("/register", loggedOutOnly, (req, res) => {
-  res.render("register");
+  res.render("sessions/register");
 });
 
 router.post(
@@ -39,14 +43,15 @@ router.post("/register", (req, res, next) => {
   user.save((err, user) => {
     req.login(user, function(err) {
       if (err) {
-        return next(err);
+        req.flash("error", "Username already exists");
+        return res.redirect("/register");
       }
       return res.redirect("/");
     });
   });
 });
 
-router.get("/logout", function(req, res) {
+router.get("/logout", loggedInOnly, (req, res) => {
   req.logout();
   res.redirect("/");
 });

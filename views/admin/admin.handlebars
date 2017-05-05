@@ -1,0 +1,40 @@
+<div class="templatemo_main">
+
+    <div class="templatemo_content">
+ 
+        {{#each recipes as |recipe|}}
+            <div class="content_box">
+                <h2>{{recipe.name}}</h2>
+                <div class="image_wrapper image_fr"><span></span><img src="{{recipe.image}}" style="width: 217px; height: 104px;" alt="image of recipe" /></div>
+                <p><strong>Servings: {{recipe.recipeYield}}</strong></p>
+                <p><ul>
+                {{#each recipe.ingredients as |ingredient|}}
+                <li>{{ingredient}}</li>
+                {{/each}}</ul></p>   
+            <p>{{recipe.instructions}} <a href="{{recipe.url}}">{{recipe.url}}</a></p>
+            <cite>{{recipe.owner.username}} on {{formatDate recipe.createdAt}}</cite>
+          <div class="recipeButtons float_r">
+  
+            <a href="/recipes/edit/{{recipe._id}}" class="btn btn-default" style="color: blue">Edit</a>
+            <a href="/recipes/{{ recipe._id }}?_method=delete" class="btn btn-default" style="color: red">Delete</a>
+
+            {{#if recipe.reportedBy.length}}
+            <a href="/admin/reported" class="btn btn-default" style="color: red;"><strong>REPORTED</strong></a>
+            {{/if}}
+
+            </div>
+          </div>
+   
+        {{else}}
+        <p>No recipes here.</p>
+        {{/each}}
+        
+        
+    </div> <!-- end of content -->
+    
+
+    <div class="cleaner"></div>
+</div> <!-- end of main -->
+
+    
+

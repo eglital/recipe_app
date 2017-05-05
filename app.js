@@ -135,6 +135,8 @@ var indexRouter = require("./routers/index");
 app.use("/", indexRouter);
 var recipesRouter = require("./routers/recipes");
 app.use("/recipes", recipesRouter);
+var adminRouter = require("./routers/admin");
+app.use("/admin", adminRouter);
 
 // ----------------------------------------
 // Template Engine

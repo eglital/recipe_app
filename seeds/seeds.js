@@ -3,7 +3,7 @@ module.exports = () => {
   //Create Users
   console.log("Creating Users");
   var users = [];
-  ["test", "admin", "Rob", "Natalie", "Emma", "Jason"].forEach(name => {
+  ["admin", "test", "Rob", "Natalie", "Emma", "Jason"].forEach(name => {
     users.push(
       new User({
         username: name,
@@ -24,7 +24,7 @@ module.exports = () => {
   data.forEach(rec => {
     recipes.push(
       new Recipe({
-        owner: users[Math.floor(Math.random() * 5)]._id,
+        owner: users[Math.floor(Math.random() * 5) + 1]._id,
         name: rec.name,
         ingredients: rec.ingredients.split("\n"),
         instructions: rec.description,

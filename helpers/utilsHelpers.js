@@ -16,4 +16,17 @@ UtilsHelper.isIn = function(id, array) {
   }).length;
 };
 
+UtilsHelper.isAdmin = function(username) {
+  return username === "admin";
+};
+UtilsHelper.bootstrapAlertClassFor = function(key) {
+  return (
+    {
+      error: "danger",
+      alert: "danger",
+      notice: "info"
+    }[key] || key
+  );
+};
+
 module.exports = UtilsHelper;

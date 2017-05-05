@@ -13,8 +13,23 @@ const loggedOutOnly = (req, res, next) => {
     res.redirect("/");
   }
 };
-
+const adminOnly = (req, res, next) => {
+  if (req.user.username === "admin") {
+    next();
+  } else {
+    res.redirect("/");
+  }
+};
+const notAdminOnly = (req, res, next) => {
+  if (req.user.username !== "admin") {
+    next();
+  } else {
+    res.redirect("/");
+  }
+};
 module.exports = {
   loggedOutOnly,
-  loggedInOnly
+  loggedInOnly,
+  adminOnly,
+  notAdminOnly
 };
