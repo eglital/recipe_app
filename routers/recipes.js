@@ -6,15 +6,6 @@ const User = mongoose.model("User");
 const Recipe = mongoose.model("Recipe");
 const { loggedInOnly, loggedOutOnly } = require("../helpers/sessions");
 
-router.get("/", loggedInOnly, (req, res) => {
-  Recipe.find({})
-    .populate("owner")
-    .sort({ createdAt: "desc" })
-    .then(recipes => {
-      res.render("home", { recipes });
-    });
-});
-
 router.get("/add", loggedInOnly, (req, res) => {
   res.render("addRecipe");
 });
@@ -42,6 +33,16 @@ router.post("/add", loggedInOnly, (req, res) => {
     .save()
     .then(recipe => {
       res.redirect("/");
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+router.get("/edit/:id", loggedInOnly, (req, res) => {
+  let recipeId = req.params.id;
+  Recipe.findById(recipeId)
+    .then(recipe => {
+      recipe.ingredients = recipe.ingredients.join("; ");
+      res.render("editRecipe", { recipe });
     })
     .catch(e => res.status(500).send(e.stack));
 });

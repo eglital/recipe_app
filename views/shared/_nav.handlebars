@@ -1,14 +1,14 @@
 <div id="templatemo_header">
     
         <div id="site_title">
-            <a href="/"><img src="images/food.png" style="width: 50px" alt="logo" /><span>Stir things up</span></a>
+            <a href="/"><img src="/images/food.png" style="width: 50px" alt="logo" /><span>Stir things up</span></a>
         </div> <!-- end of site_title -->
         
         <div id="templatemo_menu">
             {{#if currentUser}}
             <ul>
                 <li><a href="#">{{currentUser.username}}</a></li>
-                <li><a href="/add">Add recipe</a></li>
+                <li><a href="/recipes/add">Add recipe</a></li>
               <li><a href="#">My recipes</a></li>
                 <li class="last"><a href="/logout">Logout</a></li>
             </ul> 
