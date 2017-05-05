@@ -1,33 +1,46 @@
-// module.exports = () => {
+const bcrypt = require("bcrypt");
+module.exports = () => {
+  //Create Users
+  console.log("Creating Users");
+  var users = [];
+  ["test", "Rob", "Natalie", "Emma", "Jason"].forEach(name => {
+    users.push(
+      new User({
+        username: name,
+        passwordHash: bcrypt.hashSync(name, 8)
+      })
+    );
+  });
 
-//Create Users
-//   console.log('Creating Users');
-//   var users = [];
-//   for (let i = 0; i < 5; i++) {
-//     var user = new User({
-//       fname: 'Foo',
-//       lname: 'Bar',
-//       username: `foobar${ i }`,
-//       email: `foobar${ i }@gmail.com`
-//     });
-//     users.push(user);
-//   }
+  //Create recipes
+  var recipes = [];
+  var data = require("./recipeData");
+  data.forEach(rec => {
+    recipes.push(
+      new Recipe({
+        ownerId: users[Math.floor(Math.random() * 5)]._id,
+        name: rec.name,
+        ingredients: rec.ingredients.split("\n"),
+        instructions: rec.description + rec.url,
+        image: rec.image,
+        recipeYield: rec.recipeYield
+      })
+    );
+  });
 
-//   //Create recipes
-
-//   // ----------------------------------------
-//   // Finish
-//   // ----------------------------------------
-//   console.log('Saving...');
-//   var promises = [];
-//   [
-//     users,
-//     recipes
-//     //other models...
-//   ].forEach((collection) => {
-//     collection.forEach((model) => {
-//       promises.push(model.save());
-//     });
-//   });
-//   return Promise.all(promises);
-// };
+  // ----------------------------------------
+  // Finish
+  // ----------------------------------------
+  console.log("Saving...");
+  var promises = [];
+  [
+    users,
+    recipes
+    //other models...
+  ].forEach(collection => {
+    collection.forEach(model => {
+      promises.push(model.save());
+    });
+  });
+  return Promise.all(promises);
+};
