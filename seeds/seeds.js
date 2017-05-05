@@ -14,6 +14,12 @@ module.exports = () => {
 
   //Create recipes
   var recipes = [];
+  var images = [
+    "/images/sandwich.jpg",
+    "/images/spaghetti.jpg",
+    "/images/mexican.jpg",
+    "/images/coated.jpg"
+  ];
   var data = require("./recipeData");
   data.forEach(rec => {
     recipes.push(
@@ -21,9 +27,10 @@ module.exports = () => {
         ownerId: users[Math.floor(Math.random() * 5)]._id,
         name: rec.name,
         ingredients: rec.ingredients.split("\n"),
-        instructions: rec.description + rec.url,
-        image: rec.image,
-        recipeYield: rec.recipeYield
+        instructions: rec.description,
+        image: images[Math.floor(Math.random() * 4)],
+        recipeYield: rec.recipeYield,
+        url: rec.url
       })
     );
   });

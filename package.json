@@ -27,6 +27,7 @@
     "express-flash": "0.0.2",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.2",
+    "moment": "^2.18.1",
     "mongoose": "^4.9.7",
     "mongoose-unique-validator": "^1.0.5",
     "morgan": "^1.8.1"

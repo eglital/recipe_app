@@ -138,10 +138,12 @@ app.use("/", indexRouter);
 // Template Engine
 // ----------------------------------------
 var expressHandlebars = require("express-handlebars");
+var utilsHelpers = require("./helpers/utilsHelpers");
 
 var hbs = expressHandlebars.create({
   partialsDir: "views/",
-  defaultLayout: "main"
+  defaultLayout: "main",
+  helpers: utilsHelpers
 });
 
 app.engine("handlebars", hbs.engine);

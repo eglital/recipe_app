@@ -14,9 +14,9 @@ body {
   font-size: 13px;
   line-height: 1.5em; 
   background-color: #000;
-  background-image: url(../images/background.jpg);
+  background-image: url(../images/fern.jpg);
   background-position: top center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 
 a, a:link, a:visited { color: #333; text-decoration: underline; }
@@ -173,8 +173,8 @@ em { color: #e55822; }
 }
 
 .templatemo_content {
-  float: left;
-  width: 550px;
+width: 100%;
+padding: 0 30px;
 }
 
 .templatemo_content p {

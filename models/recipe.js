@@ -8,7 +8,8 @@ const RecipeSchema = new Schema(
     ingredients: Array,
     recipeYield: Number,
     instructions: String,
-    image: String
+    image: String,
+    url: String
   },
   {
     timestamps: true

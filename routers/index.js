@@ -3,10 +3,14 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const models = require("./../models");
 const User = mongoose.model("User");
+const Recipe = mongoose.model("Recipe");
 const { loggedInOnly, loggedOutOnly } = require("../helpers/sessions");
 const passport = require("passport");
+
 router.get("/", loggedInOnly, (req, res) => {
-  res.render("home");
+  Recipe.find({}).populate("ownerId").then(recipes => {
+    res.render("home", { recipes });
+  });
 });
 
 router.get("/login", loggedOutOnly, (req, res) => {
