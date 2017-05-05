@@ -1,10 +1,11 @@
-var express = require("express");
-var app = express();
-
+const express = require("express");
+const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 // ----------------------------------------
 // Body Parser
 // ----------------------------------------
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // ----------------------------------------
@@ -128,6 +129,20 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// WEBSOCKETS
+
+app.use(
+  "/socket.io",
+  express.static(__dirname + "node_modules/socket.io-client/dist/")
+);
+
+io.on("connection", client => {
+  client.on("add recipe", recipe => {
+    io.emit("new recipe", recipe);
+  });
+});
+
 // ----------------------------------------
 // Routes
 // ----------------------------------------
@@ -158,14 +173,17 @@ app.set("view engine", "handlebars");
 // ----------------------------------------
 var port = process.env.PORT || process.argv[2] || 3000;
 var host = "localhost";
-
-var args;
-process.env.NODE_ENV === "production" ? (args = [port]) : (args = [port, host]);
-
-args.push(() => {
-  console.log(`Listening: http://${host}:${port}`);
+server.listen(port, function(err) {
+  console.log(`listening on ${port}`);
 });
 
-app.listen.apply(app, args);
+// var args;
+// process.env.NODE_ENV === "production" ? (args = [port]) : (args = [port, host]);
+
+// args.push(() => {
+//   console.log(`Listening: http://${host}:${port}`);
+// });
+
+// app.listen.apply(app, args);
 
 module.exports = app;

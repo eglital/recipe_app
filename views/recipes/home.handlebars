@@ -2,9 +2,10 @@
   {{#if currentUser.my}}
   <h1 class="text-center">My Recipes</h1>
   <br>
-  {{/if}}
-
   <div class="templatemo_content">
+{{else}}
+  <div class="templatemo_content" id="here">
+  {{/if}}
 
     {{#each recipes as |recipe|}}
       <div class="content_box">
