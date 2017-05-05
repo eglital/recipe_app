@@ -84,7 +84,18 @@ router.get("/my", loggedInOnly, (req, res) => {
     .sort({ createdAt: "desc" })
     .then(recipes => {
       res.render("home", { recipes });
-    });
+    })
+    .catch(e => res.status(500).send(e.stack));
+});
+
+router.get("/report/:id", loggedInOnly, (req, res) => {
+  Recipe.findByIdAndUpdate(req.params.id, {
+    $push: { reportedBy: req.user._id }
+  })
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch(e => res.status(500).send(e.stack));
 });
 
 module.exports = router;

@@ -3,7 +3,7 @@ module.exports = () => {
   //Create Users
   console.log("Creating Users");
   var users = [];
-  ["test", "Rob", "Natalie", "Emma", "Jason"].forEach(name => {
+  ["test", "admin", "Rob", "Natalie", "Emma", "Jason"].forEach(name => {
     users.push(
       new User({
         username: name,

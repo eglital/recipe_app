@@ -10,4 +10,10 @@ UtilsHelper.isOwner = function(id1, id2) {
   return id1.toString() === id2.toString();
 };
 
+UtilsHelper.isIn = function(id, array) {
+  return array.filter(el => {
+    return el.toString() === id.toString();
+  }).length;
+};
+
 module.exports = UtilsHelper;

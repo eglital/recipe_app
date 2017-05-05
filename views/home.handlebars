@@ -24,7 +24,11 @@
                 <a href="/recipes/edit/{{recipe._id}}" class="btn btn-default" style="color: blue">Edit</a>
                 <a href="/recipes/{{ recipe._id }}?_method=delete" class="btn btn-default" style="color: red">Delete</a>
                 {{else}}
+                  {{#if (isIn ../currentUser._id recipe.reportedBy)}}
+                  <a href="#" class="btn btn-default" disabled style="color: red">Reported</a>
+                  {{else}}
                 <a href="/recipes/report/{{recipe._id}}" class="btn btn-default" style="color: red">Report</a>
+                {{/if}}
               {{/if}}
               </div>
               </div>
