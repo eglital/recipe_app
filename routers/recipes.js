@@ -32,7 +32,7 @@ router.post("/add", loggedInOnly, (req, res) => {
   var newRecipe = new Recipe({
     owner,
     name,
-    ingredients,
+    ingredients: ingredients.split("; "),
     recipeYield,
     instructions,
     image,
