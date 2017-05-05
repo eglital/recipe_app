@@ -219,3 +219,7 @@ padding: 0 30px;
 }
 
 /* end of footer */
+
+.recipeButtons a {
+  text-decoration: none
+}
