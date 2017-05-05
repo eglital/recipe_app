@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const RecipeSchema = new Schema(
   {
-    ownerId: {type: Schema.Types.ObjectId, ref: "User"}
+    ownerId: { type: Schema.Types.ObjectId, ref: "User" },
     name: String,
     category: String,
     ingredients: Array,
     recipeYield: Number,
-    instructions: String 
+    instructions: String
   },
   {
     timestamps: true

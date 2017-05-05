@@ -26,12 +26,6 @@ app.use(
 const flash = require("express-flash");
 app.use(flash());
 
-// app.use((req, res, next) => {
-//   res.locals.session = req.session;
-//   res.locals.currentUser = req.session.currentUser;
-//   next();
-// });
-
 // ----------------------------------------
 // Method Override
 // ----------------------------------------
@@ -97,37 +91,43 @@ app.use((req, res, next) => {
   }
 });
 
-// require Passport and the Local Strategy
-// const passport = require("passport");
-// app.use(passport.initialize());
-// app.use(passport.session());
+//require Passport and the Local Strategy
+const passport = require("passport");
+app.use(passport.initialize());
+app.use(passport.session());
 
-// const User = require("./models/user");
-// const LocalStrategy = require("passport-local").Strategy;
+const User = require("./models/user");
+const LocalStrategy = require("passport-local").Strategy;
 
-// passport.use(
-//   new LocalStrategy(function(username, password, done) {
-//     User.findOne({ username }, function(err, user) {
-//       console.log(user);
-//       if (err) return done(err);
-//       if (!user || !user.validPassword(password)) {
-//         return done(null, false, { message: "Invalid username/password" });
-//       }
-//       return done(null, user);
-//     });
-//   })
-// );
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    User.findOne({ username }, function(err, user) {
+      console.log(user);
+      if (err) return done(err);
+      if (!user || !user.validPassword(password)) {
+        return done(null, false, { message: "Invalid username/password" });
+      }
+      return done(null, user);
+    });
+  })
+);
 
-// passport.serializeUser(function(user, done) {
-//   done(null, user.id);
-// });
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
 
-// passport.deserializeUser(function(id, done) {
-//   User.findById(id, function(err, user) {
-//     done(err, user);
-//   });
-// });
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
+app.use((req, res, next) => {
+  if (req.user) {
+    res.locals.currentUser = req.user;
+  }
+  next();
+});
 // ----------------------------------------
 // Routes
 // ----------------------------------------
