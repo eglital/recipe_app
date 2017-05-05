@@ -224,3 +224,16 @@ padding: 0 30px;
 .recipeButtons a {
   text-decoration: none
 }
+
+.hidden {
+  display: none;
+}
+p.likesList {
+  margin-bottom: 0;
+}
+ul.likesList {
+  color: blue;
+}
+.like {
+  cursor: pointer;
+}

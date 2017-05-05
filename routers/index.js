@@ -12,7 +12,7 @@ router.get("/", loggedInOnly, (req, res) => {
     res.redirect("/admin");
   } else {
     Recipe.find({})
-      .populate("owner")
+      .populate("owner likedBy")
       .sort({ createdAt: "desc" })
       .then(recipes => {
         res.render("recipes/home", { recipes });

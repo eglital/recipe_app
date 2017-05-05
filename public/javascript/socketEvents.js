@@ -46,4 +46,9 @@ $(document).ready(function() {
       username
     });
   });
+
+  $(".like").click(e => {
+    let recipeId = e.target.id.split("_")[1];
+    $(`#likes_${recipeId}`).toggleClass("hidden");
+  });
 });

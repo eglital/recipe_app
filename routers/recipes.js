@@ -87,7 +87,7 @@ router.delete("/:id", (req, res) => {
 router.get("/my", loggedInOnly, notAdminOnly, (req, res) => {
   res.locals.currentUser.my = true;
   Recipe.find({ owner: req.user._id })
-    .populate("owner")
+    .populate("owner likedBy")
     .sort({ createdAt: "desc" })
     .then(recipes => {
       res.render("recipes/home", { recipes });
