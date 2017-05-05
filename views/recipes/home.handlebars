@@ -43,7 +43,7 @@
             {{#if (isIn ../currentUser._id recipe.reportedBy)}}
             <button class="btn btn-default" disabled style="color: red">Reported</button>
             {{else}}
-          <a href="/recipes/like/{{recipe._id}}" class="btn btn-default" style="color: red">Report</a>
+          <a href="/recipes/report/{{recipe._id}}" class="btn btn-default" style="color: red">Report</a>
           {{/if}}
         {{/if}}
         </div>
