@@ -7,7 +7,6 @@ UtilsHelper.formatDate = function(date) {
 };
 
 UtilsHelper.isOwner = function(id1, id2) {
-  console.log(id1, id2);
   return id1.toString() === id2.toString();
 };
 

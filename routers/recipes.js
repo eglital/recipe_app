@@ -37,7 +37,7 @@ router.post("/add", loggedInOnly, (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 
-router.get("/:id", loggedInOnly, (req, res) => {
+router.get("/edit/:id", loggedInOnly, (req, res) => {
   let recipeId = req.params.id;
   Recipe.findById(recipeId)
     .then(recipe => {
@@ -51,7 +51,7 @@ router.get("/:id", loggedInOnly, (req, res) => {
     .catch(e => res.status(500).send(e.stack));
 });
 
-router.put("/:id", (req, res) => {
+router.put("/edit/:id", (req, res) => {
   var { name, ingredients, recipeYield, instructions, image, url } = req.body;
   ingredients = ingredients.split("; ");
   Recipe.findByIdAndUpdate(req.params.id, {
@@ -63,7 +63,7 @@ router.put("/:id", (req, res) => {
   })
     .then(() => {
       req.method = "GET";
-      res.redirect("/");
+      res.redirect("back");
     })
     .catch(e => res.status(500).send(e.stack));
 });
@@ -72,9 +72,19 @@ router.delete("/:id", (req, res) => {
   Recipe.findByIdAndRemove(req.params.id)
     .then(() => {
       req.method = "GET";
-      res.redirect("/");
+      res.redirect("back");
     })
     .catch(e => res.status(500).send(e.stack));
+});
+
+router.get("/my", loggedInOnly, (req, res) => {
+  res.locals.currentUser.my = true;
+  Recipe.find({ owner: req.user._id })
+    .populate("owner")
+    .sort({ createdAt: "desc" })
+    .then(recipes => {
+      res.render("home", { recipes });
+    });
 });
 
 module.exports = router;

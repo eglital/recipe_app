@@ -2,9 +2,12 @@
     
     
     <div class="templatemo_main">
-        
+        {{#if currentUser.my}}
+        <h1 class="text-center">My Recipes</h1>
+        <br>
+        {{/if}}
         <div class="templatemo_content">
-
+        {{#if recipes.length}}
             {{#each recipes as |recipe|}}
                 <div class="content_box">
                     <h2>{{recipe.name}}</h2>
@@ -16,16 +19,19 @@
                     {{/each}}</ul></p>   
                 <p>{{recipe.instructions}} <a href="{{recipe.url}}">{{recipe.url}}</a></p>
                 <cite>{{recipe.owner.username}} on {{formatDate recipe.createdAt}}</cite>
-              {{#if (isOwner ../currentUser._id recipe.owner._id)}}
               <div class="recipeButtons float_r">
-                <a href="/recipes/{{recipe._id}}" class="btn btn-default" style="color: blue">Edit</a>
+              {{#if (isOwner ../currentUser._id recipe.owner._id)}}
+                <a href="/recipes/edit/{{recipe._id}}" class="btn btn-default" style="color: blue">Edit</a>
                 <a href="/recipes/{{ recipe._id }}?_method=delete" class="btn btn-default" style="color: red">Delete</a>
-              </div>
+                {{else}}
+                <a href="/recipes/report/{{recipe._id}}" class="btn btn-default" style="color: red">Report</a>
               {{/if}}
               </div>
-
-
+              </div>
             {{/each}}
+            {{else}}
+            <p>You don't have any recipes submitted.</p>
+            {{/if}}
             
             
         </div> <!-- end of content -->

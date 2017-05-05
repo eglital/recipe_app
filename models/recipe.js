@@ -9,7 +9,8 @@ const RecipeSchema = new Schema(
     recipeYield: Number,
     instructions: String,
     image: String,
-    url: String
+    url: String,
+    reportedBy: [{ type: Schema.Types.ObjectId, ref: "User" }]
   },
   {
     timestamps: true
@@ -19,4 +20,3 @@ const RecipeSchema = new Schema(
 const Recipe = mongoose.model("Recipe", RecipeSchema);
 
 module.exports = Recipe;
-
