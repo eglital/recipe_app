@@ -1,0 +1,49 @@
+<div class="templatemo_main">
+        
+        <div class="templatemo_content">
+<form class="form-horizontal" action="/add" method="POST">
+<input type="hidden" name="owner" value="{{currentUser._id}}">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" name="name" class="form-control" id="name" value="Scalloped Potatoes and Ham">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="recipeYield" class="col-sm-2 control-label">Portions</label>
+    <div class="col-sm-10">
+      <input type="number" name="recipeYield" class="form-control" id="recipeYield" value="12">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="ingredients" class="col-sm-2 control-label">Ingredients</label>
+    <div class="col-sm-10">
+    <textarea class="form-control" rows="5" name="ingredients" id="ingredients">3 pounds Russet Or Yukon Gold Potatoes, Washed Thoroughly; 2 Tablespoons Butter; 1 whole Yellow Onion, Diced; 3 cups Diced Ham; 1-1/2 cup Half-and-half; 1-1/2 cup Heavy Cream; 1/4 cup Flour; Black Pepper To Taste; 1 cup Grated Cheddar Cheese; 1 cup Grated Monterey Jack Cheese; Chopped Parsley (optional)</textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="instructions" class="col-sm-2 control-label">Instructions</label>
+    <div class="col-sm-10">
+    <textarea class="form-control" rows="6" name="instructions" id="instructions">Happy Day-After-Easter! How was your weekend? Did you dye Easter eggs? Did you eat chocolate? Did you eat ham? What's your so...</textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="url" class="col-sm-2 control-label">Link</label>
+    <div class="col-sm-10">
+      <input type="text" name="url" class="form-control" id="url" value="http://thepioneerwoman.com/cooking/2012/04/scalloped-potatoes-and-ham/">
+    </div>
+  </div>
+    <div class="form-group">
+    <label for="image" class="col-sm-2 control-label">Photo</label>
+    <div class="col-sm-10">
+      <input type="text" name="image" class="form-control" id="image" value="/images/lasagna.jpg">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Add Recipe</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>

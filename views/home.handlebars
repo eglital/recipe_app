@@ -9,25 +9,17 @@
                 <div class="content_box">
                     <h2>{{recipe.name}}</h2>
                     <div class="image_wrapper image_fr"><span></span><img src="{{recipe.image}}" style="width: 217px; height: 104px;" alt="image of recipe" /></div>
+                    <p><strong>Servings: {{recipe.recipeYield}}</strong></p>
                     <p><ul>
                     {{#each recipe.ingredients as |ingredient|}}
                     <li>{{ingredient}}</li>
                     {{/each}}</ul></p>   
                 <p>{{recipe.instructions}} <a href="{{recipe.url}}">{{recipe.url}}</a></p>
-                <cite>{{recipe.ownerId.username}} on {{formatDate recipe.createdAt}}</cite>
+                <cite>{{recipe.owner.username}} on {{formatDate recipe.createdAt}}</cite>
               </div>
 
             {{/each}}
             
-            <!-- 
-            
-          <div class="content_box">
-            <h2>Vestibulum arcu augue</h2>
-                <div class="image_wrapper image_fr"><span></span><img src="images/templatemo_image_01.png" alt="image 1" /></div>
-                <p>Pellentesque lobortis bibendum tortor sit amet ant pellentesque. Nulla facilisi. <a href="#">Fusce ferme</a> ntarc fort condimentum interdum malesuada dolor soda am.</p>
-                <p>Praesent consectetur gravida mauris ut cursu son Nam ut ipsum et urna consectetur <a href="#">commodo</a>.</p>
-            <div class="cleaner"></div>
-          </div> -->
             
         </div> <!-- end of content -->
         

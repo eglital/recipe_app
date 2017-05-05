@@ -8,9 +8,12 @@ const { loggedInOnly, loggedOutOnly } = require("../helpers/sessions");
 const passport = require("passport");
 
 router.get("/", loggedInOnly, (req, res) => {
-  Recipe.find({}).populate("ownerId").then(recipes => {
-    res.render("home", { recipes });
-  });
+  Recipe.find({})
+    .populate("owner")
+    .sort({ createdAt: "desc" })
+    .then(recipes => {
+      res.render("home", { recipes });
+    });
 });
 
 router.get("/login", loggedOutOnly, (req, res) => {

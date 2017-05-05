@@ -133,6 +133,8 @@ app.use((req, res, next) => {
 // ----------------------------------------
 var indexRouter = require("./routers/index");
 app.use("/", indexRouter);
+var recipesRouter = require("./routers/recipes");
+app.use("/", recipesRouter);
 
 // ----------------------------------------
 // Template Engine

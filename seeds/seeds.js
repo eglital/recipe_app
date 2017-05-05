@@ -24,7 +24,7 @@ module.exports = () => {
   data.forEach(rec => {
     recipes.push(
       new Recipe({
-        ownerId: users[Math.floor(Math.random() * 5)]._id,
+        owner: users[Math.floor(Math.random() * 5)]._id,
         name: rec.name,
         ingredients: rec.ingredients.split("\n"),
         instructions: rec.description,
