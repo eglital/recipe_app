@@ -1,3 +1,5 @@
+https://stir-things-up.herokuapp.com/
+
 Recipe App by Egle Libby
 
 Before using the app you should run $ npm install in your command line. Then seed database with $ npm run seeds so you wouldn't start with an empty main page. You have to have MongoDB running before doing that.
