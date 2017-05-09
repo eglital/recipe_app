@@ -1,8 +1,8 @@
 {
-  "name": "mar-hackaton-fantastic-octo-lamp",
+  "name": "recipe-app",
   "version": "1.0.0",
-  "description": "Hackaton End of Week 6. GET CRAZY CODING!",
-  "main": "index.js",
+  "description": "Hackaton End of Week 6",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seeds": "node seeds",
@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/eglital/mar-hackaton-fantastic-octo-lamp/issues"
   },
-  "homepage": "https://github.com/eglital/mar-hackaton-fantastic-octo-lamp#readme",
+  "homepage": "https://github.com/eglital/recipe-app#readme",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
@@ -31,6 +31,7 @@
     "mongoose": "^4.9.7",
     "mongoose-unique-validator": "^1.0.5",
     "morgan": "^1.8.1",
+    "passport": "^0.3.2",
     "socket-io": "^1.0.0",
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3"

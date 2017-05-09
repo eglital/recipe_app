@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+// const server = require("http").createServer(app);
+// const io = require("socket.io")(server);
 // ----------------------------------------
 // Body Parser
 // ----------------------------------------
@@ -130,23 +130,23 @@ app.use((req, res, next) => {
   next();
 });
 
-const formatDate = require("./helpers/utilsHelpers").formatDate;
+// const formatDate = require("./helpers/utilsHelpers").formatDate;
 
-const models = require("./models");
-const Recipe = mongoose.model("Recipe");
-// WEBSOCKETS
+// const models = require("./models");
+// const Recipe = mongoose.model("Recipe");
+// // WEBSOCKETS
 
-app.use(
-  "/socket.io",
-  express.static(__dirname + "node_modules/socket.io-client/dist/")
-);
+// app.use(
+//   "/socket.io",
+//   express.static(__dirname + "node_modules/socket.io-client/dist/")
+// );
 
-io.on("connection", client => {
-  client.on("add recipe", recipe => {
-    recipe.date = formatDate(new Date());
-    io.emit("new recipe", recipe);
-  });
-});
+// io.on("connection", client => {
+//   client.on("add recipe", recipe => {
+//     recipe.date = formatDate(new Date());
+//     io.emit("new recipe", recipe);
+//   });
+// });
 
 // ----------------------------------------
 // Routes
@@ -178,17 +178,17 @@ app.set("view engine", "handlebars");
 // ----------------------------------------
 var port = process.env.PORT || process.argv[2] || 3000;
 var host = "localhost";
-server.listen(port, function(err) {
-  console.log(`listening on ${port}`);
-});
-
-// var args;
-// process.env.NODE_ENV === "production" ? (args = [port]) : (args = [port, host]);
-
-// args.push(() => {
-//   console.log(`Listening: http://${host}:${port}`);
+// server.listen(port, function(err) {
+//   console.log(`listening on ${port}`);
 // });
 
-// app.listen.apply(app, args);
+var args;
+process.env.NODE_ENV === "production" ? (args = [port]) : (args = [port, host]);
+
+args.push(() => {
+  console.log(`Listening: http://${host}:${port}`);
+});
+
+app.listen.apply(app, args);
 
 module.exports = app;
