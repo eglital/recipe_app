@@ -99,7 +99,7 @@ router.get("/report/:id", loggedInOnly, notAdminOnly, (req, res) => {
     $push: { reportedBy: req.user._id }
   })
     .then(() => {
-      res.redirect("/");
+      res.redirect("back");
     })
     .catch(e => res.status(500).send(e.stack));
 });
@@ -109,7 +109,7 @@ router.get("/like/:id", loggedInOnly, notAdminOnly, (req, res) => {
     $push: { likedBy: req.user._id }
   })
     .then(() => {
-      res.redirect("/");
+      res.redirect("back");
     })
     .catch(e => res.status(500).send(e.stack));
 });
